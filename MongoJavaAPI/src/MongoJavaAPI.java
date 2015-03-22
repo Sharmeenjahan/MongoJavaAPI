@@ -18,7 +18,7 @@ public class MongoJavaAPI{
    {
 	    //First clean the database.
 	   	TestMongoDB db=new TestMongoDB();
-	   	db.InitConnection();
+	   	//db.InitConnection();
 	   	db.Clean();
 	   	//take the start time to get the total time it takes to complete all threads.
 	   	long begin=System.currentTimeMillis();
@@ -33,9 +33,9 @@ public class MongoJavaAPI{
 				//inserting 1000 documents in each thread.
 				public void run(){
 					TestMongoDB mon=new TestMongoDB();
-					mon.InitConnection();
-					mon.InsertRecords(1000);
-					System.out.println(" miliseconds.");
+					//mon.InitConnection();
+					mon.InsertRecords(100);
+					//System.out.println(" miliseconds.");
 				}
 			};
 			t.start();
