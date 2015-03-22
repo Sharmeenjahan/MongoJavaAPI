@@ -21,7 +21,7 @@ public class TestMongoDB{
 	DBCollection coll;
 	
 	//Initialize the connection and get the database from mongodb instance.
-   public void InitConnection(){
+   public void initConnection(){
       try{   
     	  // To connect to mongodb server
          mongoClient = new MongoClient( "localhost" , 27017 );
@@ -46,6 +46,7 @@ public class TestMongoDB{
 	   
 	   //store the start time in millisecond.
         long begin=System.currentTimeMillis();
+        initConnection();
         
         //adding multiple documents using the loop.
         for (int i=0; i < totalRecords; i++) {
@@ -56,7 +57,7 @@ public class TestMongoDB{
         //store the end time in millisecond.
         long end=System.currentTimeMillis();
         //print the time difference.
-        System.out.print(Thread.currentThread().getName() + ":"+ Long.toString(end-begin));
+        System.out.println(Thread.currentThread().getName() + ":"+ Long.toString(end-begin) + " miliseconds");
 	   }
    
    //to print records. still in progress...
@@ -84,6 +85,7 @@ public class TestMongoDB{
    //remove all the data from database.
    public void Clean(){
 	   
+	   	initConnection();
     	coll.remove(new BasicDBObject());
 	   
    }
