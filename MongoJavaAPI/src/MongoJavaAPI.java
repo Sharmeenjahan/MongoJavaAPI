@@ -17,48 +17,52 @@ public class MongoJavaAPI{
    public static void main( String args[] )
    {
 	    //First clean the database.
-	   	TestMongoDB db=new TestMongoDB();
-	   	//db.InitConnection();
-	   	db.Clean();
-	   	//take the start time to get the total time it takes to complete all threads.
-	   	long begin=System.currentTimeMillis();
+	   	//TestMongoDB db=new TestMongoDB();
+//	   	//db.InitConnection();
 	   	
-	   	int totalThreads=10;
-	   	//creating an array of threads.
-	   	Thread[] threads= new Thread[totalThreads];
+	   	MongoCrudActions mon= new MongoCrudActions();
+	   	mon.InsertRecords();
+//	   	db.Clean();
+//	   	//take the start time to get the total time it takes to complete all threads.
+//	   	long begin=System.currentTimeMillis();
+//	   	
+//	   	int totalThreads=10;
+//	   	//creating an array of threads.
+//	   	Thread[] threads= new Thread[totalThreads];
+//	   	
+//		for (int i = 0; i < totalThreads; i++) {
+//			//creating each thread with a thread number.
+//			Thread t=new Thread("Thread #" + Integer.toString(i)){
+//				//inserting 1000 documents in each thread.
+//				public void run(){
+//					TestMongoDB mon=new TestMongoDB();
+//					//mon.InitConnection();
+//					mon.InsertRecords(100);
+//					//System.out.println(" miliseconds.");
+//				}
+//			};
+//			t.start();
+//			threads[i]=t;
+//		}
+//		
+//		//Get the total time it needs to complete the operation of all threads.
+//		for(int i=0 ; i<totalThreads;i++)
+//		{
+//			try
+//			{
+//			//wait for the thread to be completed.We need that to get the total time of the whole operation.	
+//			threads[i].join();
+//			}
+//			catch(InterruptedException e)
+//			{
+//			}
+//			
+//		}
+//		//getting the end time of the operation.
+//   		long end=System.currentTimeMillis();
+//   		//print the time difference of the total insertion.
+//   		System.out.println();
+//   		System.out.println("Total:" + Long.toString(end-begin) + " miliseconds.");
+ }
 	   	
-		for (int i = 0; i < totalThreads; i++) {
-			//creating each thread with a thread number.
-			Thread t=new Thread("Thread #" + Integer.toString(i)){
-				//inserting 1000 documents in each thread.
-				public void run(){
-					TestMongoDB mon=new TestMongoDB();
-					//mon.InitConnection();
-					mon.InsertRecords(100);
-					//System.out.println(" miliseconds.");
-				}
-			};
-			t.start();
-			threads[i]=t;
-		}
-		
-		//Get the total time it needs to complete the operation of all threads.
-		for(int i=0 ; i<totalThreads;i++)
-		{
-			try
-			{
-			//wait for the thread to be completed.We need that to get the total time of the whole operation.	
-			threads[i].join();
-			}
-			catch(InterruptedException e)
-			{
-			}
-			
-		}
-		//getting the end time of the operation.
-   		long end=System.currentTimeMillis();
-   		//print the time difference of the total insertion.
-   		System.out.println();
-   		System.out.println("Total:" + Long.toString(end-begin) + " miliseconds.");
-   }
 }
