@@ -35,41 +35,50 @@ public class MongoCrudActions {
   //Insert documents into the database
   //@param number of documents we wish to insert.
    
-   public void InsertRecords(){
+   public void insertRecords(String dept_no){
 	   
         initConnection();
         
+        //select the dept_no from department table
         BasicDBObject whereQuery = new BasicDBObject();
-    	whereQuery.put("dept_no", "d001");
+    	whereQuery.put("dept_no", dept_no);
     	DBCursor cursor = dColl.find(whereQuery);
     	while(cursor.hasNext()) {
     	    DBObject dept=cursor.next();
     	    Object id=dept.get("_id");
     	    BasicDBObject newRow = new BasicDBObject("dept_no",id).append("manager_no", "01").append("manager_name", "chris");
-    	       
-            
+    	      
     	    mColl.insert(newRow);
     	    System.out.println(newRow);
-    	    //mColl.insert(new BasicDBObject("dept_no","d001").append("manager_no", "01").append("manager_name", "chris"));
+    	    
     	}
-
-    	
-    	
-    	
-        //for (DBObject doc : cur) {
-          //  String oId = (String) doc.get("_id");
-            //System.out.println(dId);
-
-            //String dName = (String) doc.get("dept_name");
-            
-            //System.out.println(dName);
-            
-            
-            //if(oId != null)
-        
-          // mColl.insert(new BasicDBObject("dept_no","d001").append("manager_no", "01").append("manager_name", "chris"));
-        //}   
    }
+
+    public void readRecords(String mName){
+    		   
+    	        initConnection();
+    	        
+    	        //select the dept_no from manager table
+    	        BasicDBObject mQuery = new BasicDBObject();
+    	    	mQuery.put("manager_name",mName);
+    	    	DBCursor cur1 = mColl.find(mQuery);
+    	    	while(cur1.hasNext()) {
+    	    	    DBObject mRow=cur1.next();
+    	    	    Object id=mRow.get("dept_no");
+    	    	    
+    	    	    //now select the dept_name from dept table using var id/dept_no of manager table
+    	    	    BasicDBObject dQuery = new BasicDBObject();
+    	    	    dQuery.put("_id", id);
+    	    	    DBCursor cur2 = dColl.find(dQuery);
+    	    	    while (cur2.hasNext()){
+    	    	    	DBObject dRow = cur2.next();
+    	    	    	String dName = (String) dRow.get("dept_name");
+    	    	    	System.out.println(dName);
+    	    	    }
+    	    	}
+    }
+    	
+    	
         
    
 
