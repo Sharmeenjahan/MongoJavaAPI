@@ -38,16 +38,18 @@ public class MongoCrudActions {
    public void InsertRecords(){
 	   
         initConnection();
-        BasicDBObject newRow = new BasicDBObject("dept_no","d001").append("manager_no", "01").append("manager_name", "chris");
-       
         
         BasicDBObject whereQuery = new BasicDBObject();
     	whereQuery.put("dept_no", "d001");
     	DBCursor cursor = dColl.find(whereQuery);
     	while(cursor.hasNext()) {
-    	    System.out.println(cursor.next());
+    	    DBObject dept=cursor.next();
+    	    Object id=dept.get("_id");
+    	    BasicDBObject newRow = new BasicDBObject("dept_no",id).append("manager_no", "01").append("manager_name", "chris");
+    	       
+            
     	    mColl.insert(newRow);
-    	    
+    	    System.out.println(newRow);
     	    //mColl.insert(new BasicDBObject("dept_no","d001").append("manager_no", "01").append("manager_name", "chris"));
     	}
 
