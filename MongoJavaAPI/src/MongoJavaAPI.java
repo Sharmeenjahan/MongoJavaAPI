@@ -21,7 +21,14 @@ public class MongoJavaAPI{
 //	   	//db.InitConnection();
 	   	
 	   	MongoCrudActions mon= new MongoCrudActions();
-	   	mon.InsertRecords();
+	   	
+	   	//Insert a record in manager table if the dept is valid in department table
+	   	mon.InsertRecords("d001");
+	   	
+	   	//Read the dept_name from department table using the manager name from the manager table
+	   	mon.readRecords("chris");
+	   	
+	   	
 //	   	db.Clean();
 //	   	//take the start time to get the total time it takes to complete all threads.
 //	   	long begin=System.currentTimeMillis();
