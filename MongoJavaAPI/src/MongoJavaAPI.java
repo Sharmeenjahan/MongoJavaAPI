@@ -23,7 +23,7 @@ public class MongoJavaAPI{
 	   	MongoCrudActions mon= new MongoCrudActions();
 	   	
 	   	//Insert a record in manager table if the dept is valid in department table
-	   	mon.InsertRecords("d001");
+	   	mon.insertRecords("d001");
 	   	
 	   	//Read the dept_name from department table using the manager name from the manager table
 	   	mon.readRecords("chris");
